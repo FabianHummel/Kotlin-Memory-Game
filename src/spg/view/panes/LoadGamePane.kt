@@ -7,10 +7,12 @@ import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
+import javafx.scene.control.TextArea
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import spg.control.DialogHandler
+import spg.control.utility.ComboBoxHandler
 import spg.control.utility.PlayerProfileFactory
 import spg.model.GameStorage
 import spg.model.PlayerProfile
@@ -21,6 +23,9 @@ class LoadGamePane(
 ) : BorderPane() {
 
 	val profile: ComboBox<PlayerProfile>
+	private val textArea = TextArea().apply {
+		this.isEditable = false
+	}
 
 	init {
 		this.padding = Insets(10.0)
@@ -31,6 +36,11 @@ class LoadGamePane(
 				this.maxWidth = Double.MAX_VALUE
 				this.promptText = "Choose an existing profile"
 				this.cellFactory = PlayerProfileFactory()
+				this.valueProperty().addListener(
+					ComboBoxHandler(
+						textArea
+					)
+				)
 
 				PlayerProfile.loadAll().also {
 					this.items = FXCollections.observableArrayList(
@@ -41,7 +51,9 @@ class LoadGamePane(
 						it
 					)
 				}
-			}
+			},
+
+			textArea
 		).apply {
 			this.spacing = 10.0
 		}

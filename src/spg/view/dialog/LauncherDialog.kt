@@ -9,12 +9,14 @@ import javafx.stage.WindowEvent
 import spg.model.PlayerProfile
 import spg.view.panes.LoadGamePane
 import spg.view.panes.NewGamePane
+import spg.view.panes.SettingsPane
 import kotlin.system.exitProcess
 
 class LauncherDialog : CustomDialogBase<PlayerProfile>() {
 
 	private lateinit var newGamePane : NewGamePane
 	private lateinit var loadGamePane : LoadGamePane
+	lateinit var settingsPane : SettingsPane
 
 	override fun content() : Node {
 		return TabPane(
@@ -33,6 +35,15 @@ class LauncherDialog : CustomDialogBase<PlayerProfile>() {
 					this@LauncherDialog
 				).apply {
 					loadGamePane = this
+				}
+			),
+
+			Tab(
+				"Settings",
+				SettingsPane(
+					this@LauncherDialog
+				).apply {
+					settingsPane = this
 				}
 			)
 		).apply {
