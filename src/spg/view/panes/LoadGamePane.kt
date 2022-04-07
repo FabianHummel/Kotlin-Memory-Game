@@ -1,6 +1,7 @@
 package spg.view.panes
 
 import javafx.collections.FXCollections
+import javafx.css.StyleOrigin
 import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.geometry.Pos
@@ -11,6 +12,7 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import spg.control.DialogHandler
 import spg.control.utility.PlayerProfileFactory
+import spg.model.GameStorage
 import spg.model.PlayerProfile
 import spg.view.dialog.CustomDialogBase
 
@@ -29,9 +31,16 @@ class LoadGamePane(
 				this.maxWidth = Double.MAX_VALUE
 				this.promptText = "Choose an existing profile"
 				this.cellFactory = PlayerProfileFactory()
-				this.items = FXCollections.observableArrayList(
-					PlayerProfile.loadAll()
-				)
+
+				PlayerProfile.loadAll().also {
+					this.items = FXCollections.observableArrayList(
+						it
+					)
+
+					GameStorage.INSTANCE.profiles.addAll(
+						it
+					)
+				}
 			}
 		).apply {
 			this.spacing = 10.0

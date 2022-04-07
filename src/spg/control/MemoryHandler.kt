@@ -65,11 +65,15 @@ class MemoryHandler(
 		iterator = 0
 		for (y in 0 until storage.player.boardY) {
 			for (x in 0 until storage.player.boardX) {
-				grid.add(
-					MemoryCard(
-						this@MemoryHandler, board.getCard(iterator++)
-					), x, y
-				)
+				board.getCard(iterator++).apply {
+					this.posX = x
+					this.posY = y
+					grid.add(
+						MemoryCard(
+							this@MemoryHandler, this
+						), x, y
+					)
+				}
 			}
 		}
 	}

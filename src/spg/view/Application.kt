@@ -19,10 +19,8 @@ class Application : Application() {
 
 	override fun start(primaryStage: Stage) {
 		STAGE = primaryStage
-		genUserData()
 
 		GameStorage()
-
 		LauncherDialog().apply {
 			this.title = "Game Launcher"
 			this.showAndWait()
@@ -38,19 +36,5 @@ class Application : Application() {
 				exitProcess(0)
 			}
 		}
-	}
-
-	private fun genUserData() {
-		ObjectOutputStream(
-			FileOutputStream(
-				File("profiles.dat")
-			)
-		).writeObject(
-			listOf(
-				PlayerProfile("Player 1", 0, 5, 6),
-				PlayerProfile("Jesus", 8, 2, 99),
-				PlayerProfile("Schurschkröte", 4, 69, 420)
-			)
-		)
 	}
 }

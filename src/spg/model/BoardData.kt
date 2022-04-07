@@ -1,25 +1,16 @@
 package spg.model
 
-class BoardData {
-	private val board: MutableList<CardData> = ArrayList()
+class BoardData : ArrayList<CardData>() {
 
 	fun addCard(card: CardData) {
-		board.add(card)
+		add(card)
 	}
 
 	fun delCard(card: CardData) {
-		board.remove(card)
+		remove(card)
 	}
 
 	fun getCard(index: Int): CardData {
-		return board[index]
-	}
-
-	fun shuffle() {
-		board.shuffle()
-	}
-
-	fun forEach(action: (CardData) -> Unit) {
-		board.forEach(action)
+		return this[index]
 	}
 }

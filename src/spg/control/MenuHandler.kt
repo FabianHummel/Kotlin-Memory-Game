@@ -43,7 +43,7 @@ class MenuHandler : EventHandler<ActionEvent> {
 			}
 
 			"menu-save" -> {
-
+				GameStorage.INSTANCE.save()
 			}
 		}
 	}
