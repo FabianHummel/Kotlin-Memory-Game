@@ -7,9 +7,11 @@ class GameStorage {
 		lateinit var INSTANCE : GameStorage
 	}
 
+	val boardData = BoardData()
 	lateinit var player : PlayerProfile
-	var boardData = BoardData()
-	var boardColor = Color.PURPLE
+	var boardColor = Color.web(
+		"#a64151"
+	) // Later applied through a settings menu
 
 	init {
 		INSTANCE = this

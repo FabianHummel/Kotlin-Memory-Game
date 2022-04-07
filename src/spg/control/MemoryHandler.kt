@@ -1,11 +1,11 @@
 package spg.control
 
-import javafx.animation.Animation
 import javafx.animation.PauseTransition
 import javafx.event.EventHandler
-import javafx.scene.image.Image
 import javafx.scene.layout.GridPane
 import javafx.util.Duration
+import spg.model.CardData
+import spg.model.GameStorage
 import spg.view.MemoryCard
 
 class MemoryHandler(
@@ -31,14 +31,44 @@ class MemoryHandler(
 		}
 	}
 
+	private fun consumeAll() {
+		flipped.forEach {
+			if (it != null && it.isFlipped() ) {
+				it.consume()
+			}
+		}
+	}
+
 	fun init() {
-		grid.children.clear()
-		for (y in 0 until 8) {
-			for (x in 0 until 8) {
+		var iterator = 0
+		val storage = GameStorage.INSTANCE
+		val board = storage.boardData
+
+
+		iterator = 0
+		var identifier = 0
+		for (y in 0 until storage.player.boardY) {
+			for (x in 0 until storage.player.boardX) {
+				if (iterator++ % 2 == 0)
+					identifier++
+
+				board.addCard(
+					CardData(
+						identifier, x, y
+					)
+				)
+			}
+		}
+
+		board.shuffle()
+
+		iterator = 0
+		for (y in 0 until storage.player.boardY) {
+			for (x in 0 until storage.player.boardX) {
 				grid.add(
-					MemoryCard(this, Image(
-						"bilder/1.jpg"
-					), x, y ), x, y
+					MemoryCard(
+						this@MemoryHandler, board.getCard(iterator++)
+					), x, y
 				)
 			}
 		}
@@ -47,7 +77,7 @@ class MemoryHandler(
 	fun contains(card: MemoryCard): Boolean {
 		var contains = false
 		flipped.forEach {
-			if (it != null && it.posX == card.posX && it.posY == card.posY) {
+			if (it === card) {
 				contains = true
 			}
 		}
@@ -68,9 +98,14 @@ class MemoryHandler(
 				locked = true
 				this.duration = Duration.seconds(1.0)
 				this.onFinished = EventHandler {
+					if (flipped[0]!!.data.identifier == flipped[1]!!.data.identifier) {
+						consumeAll()
+					} else {
+						unflipAll()
+					}
+
 					revealed = 0
 					locked = false
-					unflipAll()
 					clearFlipped()
 				}
 			}.play()
