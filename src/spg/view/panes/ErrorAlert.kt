@@ -1,10 +1,8 @@
 package spg.view.panes
 
 import javafx.scene.control.Alert
-import javafx.scene.effect.InnerShadow
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
-import javafx.scene.paint.Color
 import javafx.stage.Modality
 
 class ErrorAlert(

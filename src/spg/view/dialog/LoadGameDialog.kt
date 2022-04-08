@@ -1,12 +1,10 @@
 package spg.view.dialog
 
 import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.scene.Node
 import javafx.stage.WindowEvent
 import spg.model.PlayerProfile
 import spg.view.panes.LoadGamePane
-import kotlin.system.exitProcess
 
 class LoadGameDialog : CustomDialogBase<PlayerProfile>() {
 

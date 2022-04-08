@@ -3,13 +3,9 @@ package spg.view.dialog
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.scene.Node
-import javafx.scene.control.Button
-import javafx.scene.control.ButtonType
 import javafx.scene.control.Dialog
 import javafx.stage.Modality
 import javafx.stage.WindowEvent
-import javafx.util.Callback
-import javax.swing.Action
 
 abstract class CustomDialogBase<T> : Dialog<T>() {
 	init {

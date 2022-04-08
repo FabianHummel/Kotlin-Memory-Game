@@ -1,16 +1,17 @@
 package spg.view
 
-import javafx.animation.*
+import javafx.animation.Interpolator
+import javafx.animation.RotateTransition
+import javafx.animation.ScaleTransition
+import javafx.animation.TranslateTransition
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.scene.image.Image
 import javafx.scene.layout.*
-import javafx.scene.paint.Color
 import javafx.scene.shape.Rectangle
 import javafx.scene.transform.Rotate
 import javafx.util.Duration
-import jdk.jfr.TransitionFrom
 import spg.control.MemoryCardHandler
 import spg.control.MemoryHandler
 import spg.model.CardData
@@ -80,6 +81,7 @@ class MemoryCard(
 	}
 
 	fun consume() {
+		GameStorage.INSTANCE.delCard(data)
 		flipped = flipped.not()
 		rotate()
 		scale()

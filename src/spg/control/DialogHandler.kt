@@ -5,6 +5,7 @@ import javafx.event.EventHandler
 import javafx.scene.control.Button
 import spg.model.GameStorage
 import spg.model.PlayerProfile
+import spg.view.Application
 import spg.view.dialog.LauncherDialog
 import spg.view.panes.ErrorAlert
 import spg.view.panes.LoadGamePane
@@ -41,6 +42,8 @@ class DialogHandler(private val ctx : Any) : EventHandler<ActionEvent> {
 							this.boardColor = ctx.dialog.settingsPane.colorField.value
 						}
 					}
+
+					Application.reinitialize()
 				}
 			}
 
@@ -55,6 +58,8 @@ class DialogHandler(private val ctx : Any) : EventHandler<ActionEvent> {
 								this.boardColor = ctx.dialog.settingsPane.colorField.value
 							}
 						}
+
+						Application.reinitialize()
 					}
 				}
 			}

@@ -31,12 +31,17 @@ class LauncherDialog : CustomDialogBase<PlayerProfile>() {
 
 			Tab(
 				"Load Game",
-				LoadGamePane(
+			).apply {
+				this.content = LoadGamePane(
 					this@LauncherDialog
 				).apply {
 					loadGamePane = this
+				}.also {
+					if (it.isEmpty) {
+						this@apply.isDisable = true
+					}
 				}
-			),
+			},
 
 			Tab(
 				"Settings",

@@ -1,7 +1,6 @@
 package spg.view.panes
 
 import javafx.collections.FXCollections
-import javafx.css.StyleOrigin
 import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.geometry.Pos
@@ -12,7 +11,7 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import spg.control.DialogHandler
-import spg.control.utility.ComboBoxHandler
+import spg.control.utility.ComboBoxInspector
 import spg.control.utility.PlayerProfileFactory
 import spg.model.GameStorage
 import spg.model.PlayerProfile
@@ -22,6 +21,8 @@ class LoadGamePane(
 	val dialog: CustomDialogBase<PlayerProfile>
 ) : BorderPane() {
 
+	var isEmpty: Boolean = true
+		private set
 	val profile: ComboBox<PlayerProfile>
 	private val textArea = TextArea().apply {
 		this.isEditable = false
@@ -37,12 +38,13 @@ class LoadGamePane(
 				this.promptText = "Choose an existing profile"
 				this.cellFactory = PlayerProfileFactory()
 				this.valueProperty().addListener(
-					ComboBoxHandler(
+					ComboBoxInspector(
 						textArea
 					)
 				)
 
 				PlayerProfile.loadAll().also {
+					isEmpty = it.isEmpty()
 					this.items = FXCollections.observableArrayList(
 						it
 					)

@@ -1,7 +1,6 @@
 package spg.view.dialog
 
 import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.scene.Node
 import javafx.stage.WindowEvent
 import spg.model.PlayerProfile

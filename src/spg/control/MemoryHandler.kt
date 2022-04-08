@@ -15,7 +15,36 @@ class MemoryHandler(
 	private val flipped = arrayOfNulls<MemoryCard>(2)
 
 	init {
-		init()
+		val storage = GameStorage.INSTANCE
+		storage.boardData.apply {
+			var iterator = 0
+			for (index in 0 until storage.player.boardY * storage.player.boardX) {
+				if (index % 2 == 0)
+					iterator++
+
+				this.addCard(
+					CardData(
+						iterator /* x, y */
+					)
+				)
+			}
+		}.apply {
+			this.shuffle()
+		}.apply {
+			var index = 0
+			for (y in 0 until storage.player.boardY) {
+				for (x in 0 until storage.player.boardX) {
+//					println("$index")
+					grid.add(
+						MemoryCard(
+							this@MemoryHandler, this.getCard(
+								index++
+							)
+						), x, y
+					)
+				}
+			}
+		}
 	}
 
 	private fun clearFlipped() {
@@ -35,45 +64,6 @@ class MemoryHandler(
 		flipped.forEach {
 			if (it != null && it.isFlipped() ) {
 				it.consume()
-			}
-		}
-	}
-
-	fun init() {
-		var iterator = 0
-		val storage = GameStorage.INSTANCE
-		val board = storage.boardData
-
-
-		iterator = 0
-		var identifier = 0
-		for (y in 0 until storage.player.boardY) {
-			for (x in 0 until storage.player.boardX) {
-				if (iterator++ % 2 == 0)
-					identifier++
-
-				board.addCard(
-					CardData(
-						identifier, x, y
-					)
-				)
-			}
-		}
-
-		board.shuffle()
-
-		iterator = 0
-		for (y in 0 until storage.player.boardY) {
-			for (x in 0 until storage.player.boardX) {
-				board.getCard(iterator++).apply {
-					this.posX = x
-					this.posY = y
-					grid.add(
-						MemoryCard(
-							this@MemoryHandler, this
-						), x, y
-					)
-				}
 			}
 		}
 	}
