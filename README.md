@@ -1,4 +1,4 @@
-# <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Kotlin_Icon_2021.svg/1024px-Kotlin_Icon_2021.svg.png" alt="drawing" width="20"/> Kotlin Memory Game
+# <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Kotlin_Icon_2021.svg/1024px-Kotlin_Icon_2021.svg.png" alt="drawing" width="30"/> Kotlin Memory Game
 
 A simple memory game written in kotlin for my Programming class assignment
 
