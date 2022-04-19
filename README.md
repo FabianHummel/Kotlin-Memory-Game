@@ -4,20 +4,22 @@ A simple memory game written in kotlin for my Programming class assignment
 
 The game utilises the javafx framework to display the game and user interface.
 
-# 🐘 Features
+<br>
+
+## 🐘 Features
 
 * Serialized player profiles
 * Game Launcher
 * Settings Menu
 * Smooth Animations
 
-# 🎉 Upcoming Features
+## 🎉 Upcoming Features
 
 * Better UI
 * More Game Modes
 * Attempts Counter
 
-# ⚠️ Disclaimer
+## ⚠️ Disclaimer
 
 * This is a work in progress.
 * The game is not optimised and should not be used as a reference in any way.
